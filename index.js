@@ -1,8 +1,17 @@
 var request = require('request');
-var http = require('http');
+
+var https = require('https');
+var fs = require('fs');
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var compression = require('compression');
+
+var options = {
+     key: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/privkey.pem'),
+     cert: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/fullchain.pem'),
+     ca: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/chain.pem')
+}
 
 var conf = require('./conf');
 
@@ -11,7 +20,7 @@ app.use(compression());
 app.set('case sensitive routing', true);
 app.use(bodyParser.json());
 
-var httpServer = http.createServer(app);
+var httpServer = https.createServer(app);
 
 app.get('/', function (req, res, next) {
   res.send('Welcome to Facebook Messenger Bot. This is root endpoint');
@@ -66,6 +75,6 @@ function sendMessage(receiver, data, isText){
 }
 
 var port = conf.PORT;
-httpServer.listen(port, function () {
+httpsServer.listen(port, function () {
 	console.log("Express http server listening on port " + port);
 });
