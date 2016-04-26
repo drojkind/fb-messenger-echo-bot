@@ -20,7 +20,7 @@ app.use(compression());
 app.set('case sensitive routing', true);
 app.use(bodyParser.json());
 
-var httpsServer = require('https').createServer(options, handler);
+var httpsServer = require('https').createServer(app, options);
 //var httpsServer = https.createServer(options, handler);
 
 app.get('/', function (req, res, next) {
@@ -77,5 +77,5 @@ function sendMessage(receiver, data, isText){
 
 var port = conf.PORT;
 httpsServer.listen(port, function () {
-	console.log("Express http server listening on port " + port);
+	console.log("Express https server listening on port " + port);
 });
