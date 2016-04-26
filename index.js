@@ -3,15 +3,21 @@ var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
 var compression = require('compression');
+const fs = require('fs');
 
 var conf = require('./conf');
+
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/cert.pem')
+};
 
 var app = express();
 app.use(compression());
 app.set('case sensitive routing', true);
 app.use(bodyParser.json());
 
-var httpServer = http.createServer(app);
+var httpServer = https.createServer(options, (req, res);
 
 app.get('/', function (req, res, next) {
   res.send('Welcome to Facebook Messenger Bot. This is root endpoint');
