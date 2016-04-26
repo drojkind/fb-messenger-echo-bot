@@ -20,7 +20,7 @@ app.use(compression());
 app.set('case sensitive routing', true);
 app.use(bodyParser.json());
 
-var httpServer = https.createServer(app);
+var httpServer = https.createServer(options, handler);
 
 app.get('/', function (req, res, next) {
   res.send('Welcome to Facebook Messenger Bot. This is root endpoint');
