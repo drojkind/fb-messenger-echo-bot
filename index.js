@@ -1,5 +1,5 @@
 var request = require('request');
-var http = require('http');
+var https = require('https');
 var express = require('express');
 var bodyParser = require('body-parser');
 var compression = require('compression');
