@@ -9,7 +9,8 @@ var conf = require('./conf');
 
 const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/cert.pem')
+  cert: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/cert.pem'),
+   ca: fs.readFileSync('/etc/letsencrypt/live/sinespera.io/chain.pem')
 };
 
 var app = express();
